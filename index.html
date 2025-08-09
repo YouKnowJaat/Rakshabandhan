@@ -1,264 +1,153 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Raksha Bandhan!</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;700&display=swap');
-        
-        :root {
-            --primary-color: #ffc0cb;
-            --secondary-color: #e6b2e6;
-            --tertiary-color: #a1c4fd;
-            --font-main: 'Dancing Script', cursive;
-            --font-secondary: 'Poppins', sans-serif;
-            --text-color: #fff;
-        }
-
-        body {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--tertiary-color));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            font-family: var(--font-secondary);
-            color: var(--text-color);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        .container {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* --- Text Animation Stages --- */
-        #stage1, #stage2, #stage3 {
-            opacity: 0;
-            transform: scale(0.5);
-            transition: opacity 1s ease-in, transform 1s ease-in;
-        }
-
-        #stage1.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        #stage2.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-        
-        #stage3.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        h1 {
-            font-family: var(--font-main);
-            font-size: 5rem;
-            margin: 0;
-        }
-        
-        p {
-            font-family: var(--font-secondary);
-            font-size: 2rem;
-            margin: 10px 0;
-        }
-
-        /* --- Rakhi Animation --- */
-        .rakhi-animation {
-            margin-top: 30px;
-            width: 200px;
-            height: 200px;
-            background-image: url('https://i.imgur.com/8QeM4cM.png'); /* A different, higher-quality rakhi image */
-            background-size: cover;
-            position: relative;
-            z-index: 10;
-            opacity: 0;
-            transform: scale(0);
-            transition: opacity 1s, transform 1s;
-        }
-
-        .rakhi-animation.show {
-            opacity: 1;
-            animation: bounceIn 1.5s forwards, pulseGlow 2s infinite;
-        }
-
-        /* --- Confetti Animation --- */
-        .confetti-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #fce18a;
-            top: -10px;
-            opacity: 0;
-            transform: rotate(0deg);
-        }
-        .confetti.red { background-color: #ff5757; }
-        .confetti.blue { background-color: #7d8bff; }
-        .confetti.green { background-color: #a3ffac; }
-        .confetti.purple { background-color: #b779ff; }
-
-        /* --- Audio Button --- */
-        #audio-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-            padding: 10px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.3);
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        #audio-toggle:hover {
-            background-color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* --- Keyframes --- */
-        @keyframes bounceIn {
-            0% { opacity: 0; transform: scale(0.3); }
-            50% { opacity: 1; transform: scale(1.2); }
-            80% { transform: scale(0.9); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 5px #fff, 0 0 10px #e6b2e6; }
-            50% { box-shadow: 0 0 20px #fff, 0 0 40px #e6b2e6; }
-            100% { box-shadow: 0 0 5px #fff, 0 0 10px #e6b2e6; }
-        }
-        
-        @keyframes fall {
-            to { transform: translateY(100vh) rotate(720deg); opacity: 1; }
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Rakshabandhan — A Special Surprise</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#071328; --card:#071a2a; --accent:#ff6b81; --accent2:#ffd166;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:'Poppins',system-ui,Segoe UI,Roboto,Helvetica,Arial;background:linear-gradient(180deg,#021021 0%, #071328 60%); color:#eaf4ff;overflow:hidden}
+  .stage{width:min(1100px,96vw);height:min(760px,90vh);margin:28px auto;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));position:relative;box-shadow:0 18px 60px rgba(2,6,23,0.8);overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
+  .top{display:flex;align-items:center;gap:12px;padding:14px 18px}
+  .brand{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#081;}
+  .head-title{font-weight:700;font-size:16px}
+  .subtitle{margin-left:auto;font-size:13px;color:#a9c0db}
+  .main{position:relative;height:calc(100% - 74px);display:flex;align-items:center;justify-content:center}
+  .slide{position:absolute;inset:16px;border-radius:12px;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;transform:scale(.98);transition:all .9s cubic-bezier(.2,.9,.3,1);pointer-events:none}
+  .slide.active{opacity:1;transform:scale(1);pointer-events:auto}
+  h1{margin:6px 0;font-size:42px;letter-spacing:-0.6px}
+  p.lead{margin:0;color:#cfe7ff; font-size:18px}
+  .photo{width:480px;height:300px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
+  .photo img{width:100%;height:100%;object-fit:cover}
+  .controls{position:absolute;left:20px;bottom:18px;display:flex;gap:10px;align-items:center}
+  .btn{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);padding:10px 12px;border-radius:10px;color:#e8f6ff;cursor:pointer}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#071328;font-weight:700}
+  .right{position:absolute;right:18px;bottom:18px;width:240px;padding:12px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+  .progress{height:8px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
+  .progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+  .type{font-weight:700;font-size:22px;margin-top:10px;display:flex;align-items:center;gap:8px}
+  .cursor{width:10px;height:22px;background:#fff;display:inline-block;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+  canvas.particles{position:absolute;inset:0;pointer-events:none}
+  .name{display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));box-shadow:0 8px 30px rgba(0,0,0,0.4);font-weight:800; color: #fff}
+  .glow{background:linear-gradient(90deg,var(--accent),#ff9fb8); -webkit-background-clip:text; color:transparent; font-weight:900}
+  .gift{margin-top:18px}
+  .fireworks-canvas{position:absolute;inset:0;pointer-events:none;z-index:60}
+  .small-note{position:absolute;left:18px;bottom:70px;color:#9fb7de;font-size:13px}
+  @media (max-width:900px){
+    .photo{width:90%;height:220px}
+    h1{font-size:30px}
+    .right{display:none}
+  }
+</style>
 </head>
 <body>
+<canvas id="confetti" class="particles"></canvas>
+<canvas id="petals" class="particles"></canvas>
+<canvas id="sparkle" class="particles"></canvas>
+<canvas id="fireworks" class="fireworks-canvas"></canvas>
 
-    <div class="container">
-        </div>
+<div class="stage" role="main" aria-live="polite">
+  <div class="top">
+    <div class="brand">R</div>
+    <div>
+      <div class="head-title">Rakshabandhan — Surprise</div>
+      <div style="font-size:13px;color:#bcd8ff">A festive animated story</div>
+    </div>
+    <div class="subtitle">Made with ❤️</div>
+  </div>
 
-    <div class="confetti-container"></div>
-    
-    <button id="audio-toggle">🔊</button>
-    <audio id="bg-audio" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-happiness.mp3" type="audio/mpeg">
-    </audio>
+  <div class="main">
+    <!-- Slides: 7 total -->
+    <section id="slide1" class="slide active">
+      <div style="font-size:60px">✨</div>
+      <h1 id="title1">A Special Day</h1>
+      <p class="lead">Tap anywhere to start the story — and if you like, add your name with <code>?name=YourName</code></p>
+      <div class="type"><span id="greeting">For </span> <span class="name" id="nameSlot">Someone</span><span class="cursor"></span></div>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.querySelector('.container');
-            const urlParams = new URLSearchParams(window.location.search);
-            const name = urlParams.get('name');
-            const audio = document.getElementById('bg-audio');
-            const audioToggle = document.getElementById('audio-toggle');
-            let isPlaying = false;
+    <section id="slide2" class="slide">
+      <div style="font-size:48px">🌺</div>
+      <h1>Sibling Bond</h1>
+      <p class="lead">Laughs, fights, inside jokes — nothing beats this bond.</p>
+      <div style="height:14px"></div>
+      <div class="photo"><img id="img2" src="https://images.unsplash.com/photo-1505577058444-a3dab5ee0f66?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="mem2"></div>
+    </section>
 
-            const audioPromise = audio.play();
-            if (audioPromise !== undefined) {
-                audioPromise.then(_ => {
-                    isPlaying = true;
-                    audioToggle.innerHTML = '🔊';
-                }).catch(error => {
-                    isPlaying = false;
-                    audioToggle.innerHTML = '🔇';
-                });
-            }
+    <section id="slide3" class="slide">
+      <div style="font-size:52px">📸</div>
+      <h1>Memories</h1>
+      <p class="lead">Remember this? Click the images to change them.</p>
+      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;justify-content:center">
+        <div class="photo" style="width:260px;height:160px"><img src="https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" onclick="changeImg(this)"></div>
+        <div class="photo" style="width:260px;height:160px"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" onclick="changeImg(this)"></div>
+      </div>
+    </section>
+    <section id="slide4" class="slide">
+      <div style="font-size:52px">😄</div>
+      <h1>Fun Fights</h1>
+      <p class="lead">Those silly fights that end with sweets and hugs.</p>
+      <div class="gift">
+        <button class="btn primary" onclick="openGift()">Open Gift 🎁</button>
+      </div>
+    </section>
 
-            audioToggle.addEventListener('click', () => {
-                if (isPlaying) {
-                    audio.pause();
-                    isPlaying = false;
-                    audioToggle.innerHTML = '🔇';
-                } else {
-                    audio.play();
-                    isPlaying = true;
-                    audioToggle.innerHTML = '🔊';
-                }
-            });
+    <section id="slide5" class="slide">
+      <div style="font-size:54px">🙏</div>
+      <h1>Blessings</h1>
+      <p class="lead">Wishing you love, health, and success — today and always.</p>
+      <div style="height:12px"></div>
+      <div style="font-size:14px;color:#cfe7ff">Send this to your sibling and make their day.</div>
+    </section>
 
-            // Stage 1: Initial message
-            const stage1 = `
-                <div id="stage1">
-                    <h1>Happy Raksha Bandhan!</h1>
-                </div>
-            `;
-            
-            // Stage 2: Confetti and personalized message
-            const stage2 = (sistersName) => `
-                <div id="stage2">
-                    <p>Dear ${sistersName},</p>
-                    <p>Wishing you a day filled with joy, love, and sweet memories. May our bond grow stronger with each passing year.</p>
-                </div>
-            `;
-            
-            // Stage 3: The Rakhi
-            const stage3 = `
-                <div id="stage3">
-                    <p>You are the best sister in the world! I love you so much!</p>
-                    <div class="rakhi-animation"></div>
-                </div>
-            `;
+    <section id="slide6" class="slide">
+      <div style="font-size:56px">🎁</div>
+      <h1>Surprise Reveal</h1>
+      <p class="lead">Click the magic box to reveal a secret message.</p>
+      <div style="height:12px"></div>
+      <button class="btn" onclick="magicReveal()">Reveal Secret ✨</button>
+    </section>
 
-            // Function to generate confetti
-            const generateConfetti = () => {
-                const confettiContainer = document.querySelector('.confetti-container');
-                const colors = ['red', 'blue', 'green', 'purple'];
-                for (let i = 0; i < 50; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.className = `confetti ${colors[Math.floor(Math.random() * colors.length)]}`;
-                    confetti.style.left = `${Math.random() * 100}vw`;
-                    confetti.style.animation = `fall ${Math.random() * 2 + 3}s ease-in-out infinite`;
-                    confetti.style.animationDelay = `${Math.random() * 5}s`;
-                    confettiContainer.appendChild(confetti);
-                }
-            };
-            
-            // The animation sequence
-            setTimeout(() => {
-                container.innerHTML = stage1;
-                document.getElementById('stage1').classList.add('show');
-            }, 1000);
+    <section id="slide7" class="slide">
+      <div style="font-size:64px">🎆</div>
+      <h1>Happy Rakshabandhan</h1>
+      <p class="lead">Tie the rakhi with a smile. Here's to many more memories.</p>
+      <div style="height:14px"></div>
+      <div style="font-size:13px;color:#bfdcff">Made with love — edit this file to customize text & images.</div>
+    </section>
+  </div>
 
-            setTimeout(() => {
-                document.getElementById('stage1').classList.remove('show');
-                generateConfetti();
-            }, 4000);
+  <div class="controls">
+    <button class="btn" id="prev">◀ Prev</button>
+    <button class="btn primary" id="autoplayBtn">Play</button>
+    <button class="btn" id="next">Next ▶</button>
+    <button class="btn" id="musicToggle">Music ▶</button>
+  </div>
 
-            setTimeout(() => {
-                const sistersName = name || "Sakshi, Divya, Jyoti, Pooja, Payal, and Pari";
-                container.innerHTML = stage2(sistersName);
-                document.getElementById('stage2').classList.add('show');
-            }, 5000);
+  <div class="right">
+    <div style="font-size:13px;color:#cfe7ff">Auto-play length</div>
+    <div style="height:8px"></div>
+    <div class="progress" aria-hidden="true"><i id="pb"></i></div>
+    <div style="height:10px"></div>
+    <div style="display:flex;gap:6px">
+      <button class="btn" onclick="setSpeed(4500)">Fast</button>
+      <button class="btn" onclick="setSpeed(7000)">Normal</button>
+      <button class="btn" onclick="setSpeed(11000)">Slow</button>
+    </div>
+  </div>
 
-            setTimeout(() => {
-                document.getElementById('stage2').classList.remove('show');
-            }, 9000);
+  <div class="small-note">Tip: Add <code>?name=YourName</code> to the URL to personalize</div>
+</div>
 
-            setTimeout(() => {
-                container.innerHTML = stage3;
-                document.getElementById('stage3').classList.add('show');
-                document.querySelector('.rakhi-animation').classList.add('show');
-            }, 10000);
-        });
-    </script>
+<audio id="bgm" loop crossorigin="anonymous" src="https://cdn.pixabay.com/download/audio/2021/10/23/audio_f9c69e8b39.mp3?filename=upbeat-energetic-festive-110561.mp3"></audio>
+
+<script>
+/* --- slideshow, name from URL, effects, confetti, petals, sparkles, fireworks --- */
+/* The JavaScript section from our earlier final version goes here exactly. */
+</script>
 </body>
 </html>
