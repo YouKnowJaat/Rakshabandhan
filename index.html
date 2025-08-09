@@ -6,9 +6,7 @@
 <title>Rakshabandhan — A Special Surprise</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#071328; --card:#071a2a; --accent:#ff6b81; --accent2:#ffd166;
-  }
+  :root{--bg:#071328; --card:#071a2a; --accent:#ff6b81; --accent2:#ffd166;}
   *{box-sizing:border-box}
   html,body{height:100%;margin:0;font-family:'Poppins',system-ui,Segoe UI,Roboto,Helvetica,Arial;background:linear-gradient(180deg,#021021 0%, #071328 60%); color:#eaf4ff;overflow:hidden}
   .stage{width:min(1100px,96vw);height:min(760px,90vh);margin:28px auto;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));position:relative;box-shadow:0 18px 60px rgba(2,6,23,0.8);overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
@@ -23,7 +21,7 @@
   p.lead{margin:0;color:#cfe7ff; font-size:18px}
   .photo{width:480px;height:300px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
   .photo img{width:100%;height:100%;object-fit:cover}
-  .controls{position:absolute;left:20px;bottom:18px;display:flex;gap:10px;align-items:center}
+  .controls{position:absolute;left:20px;bottom:18px;display:flex;gap:10px;align-items:center;z-index:10}
   .btn{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03);padding:10px 12px;border-radius:10px;color:#e8f6ff;cursor:pointer}
   .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#071328;font-weight:700}
   .right{position:absolute;right:18px;bottom:18px;width:240px;padding:12px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
@@ -32,17 +30,12 @@
   .type{font-weight:700;font-size:22px;margin-top:10px;display:flex;align-items:center;gap:8px}
   .cursor{width:10px;height:22px;background:#fff;display:inline-block;animation:blink 1s steps(2) infinite}
   @keyframes blink{50%{opacity:0}}
-  canvas.particles{position:absolute;inset:0;pointer-events:none}
-  .name{display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));box-shadow:0 8px 30px rgba(0,0,0,0.4);font-weight:800; color: #fff}
+  canvas.particles, canvas.fireworks-canvas{position:absolute;inset:0;pointer-events:none}
+  .name{display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));box-shadow:0 8px 30px rgba(0,0,0,0.4);font-weight:800;color:#fff}
   .glow{background:linear-gradient(90deg,var(--accent),#ff9fb8); -webkit-background-clip:text; color:transparent; font-weight:900}
   .gift{margin-top:18px}
-  .fireworks-canvas{position:absolute;inset:0;pointer-events:none;z-index:60}
   .small-note{position:absolute;left:18px;bottom:70px;color:#9fb7de;font-size:13px}
-  @media (max-width:900px){
-    .photo{width:90%;height:220px}
-    h1{font-size:30px}
-    .right{display:none}
-  }
+  @media (max-width:900px){.photo{width:90%;height:220px} h1{font-size:30px} .right{display:none}}
 </style>
 </head>
 <body>
@@ -62,62 +55,42 @@
   </div>
 
   <div class="main">
-    <!-- Slides: 7 total -->
-    <section id="slide1" class="slide active">
+    <section class="slide active">
       <div style="font-size:60px">✨</div>
-      <h1 id="title1">A Special Day</h1>
-      <p class="lead">Tap anywhere to start the story — and if you like, add your name with <code>?name=YourName</code></p>
-      <div class="type"><span id="greeting">For </span> <span class="name" id="nameSlot">Someone</span><span class="cursor"></span></div>
+      <h1>A Special Day</h1>
+      <p class="lead">Tap anywhere to start — add your name with <code>?name=YourName</code></p>
+      <div class="type"><span id="greeting">For</span> <span class="name" id="nameSlot">Someone</span><span class="cursor"></span></div>
     </section>
-
-    <section id="slide2" class="slide">
-      <div style="font-size:48px">🌺</div>
-      <h1>Sibling Bond</h1>
+    <section class="slide">
+      <div style="font-size:48px">🌺</div><h1>Sibling Bond</h1>
       <p class="lead">Laughs, fights, inside jokes — nothing beats this bond.</p>
-      <div style="height:14px"></div>
-      <div class="photo"><img id="img2" src="https://images.unsplash.com/photo-1505577058444-a3dab5ee0f66?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="mem2"></div>
+      <div class="photo"><img src="https://images.unsplash.com/photo-1505577058444-a3dab5ee0f66?q=80" alt=""></div>
     </section>
-
-    <section id="slide3" class="slide">
-      <div style="font-size:52px">📸</div>
-      <h1>Memories</h1>
-      <p class="lead">Remember this? Click the images to change them.</p>
-      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;justify-content:center">
-        <div class="photo" style="width:260px;height:160px"><img src="https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" onclick="changeImg(this)"></div>
-        <div class="photo" style="width:260px;height:160px"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" onclick="changeImg(this)"></div>
+    <section class="slide">
+      <div style="font-size:52px">📸</div><h1>Memories</h1>
+      <p class="lead">Click images to change them.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <div class="photo" style="width:260px;height:160px"><img src="https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80" onclick="changeImg(this)"></div>
+        <div class="photo" style="width:260px;height:160px"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80" onclick="changeImg(this)"></div>
       </div>
     </section>
-    <section id="slide4" class="slide">
-      <div style="font-size:52px">😄</div>
-      <h1>Fun Fights</h1>
+    <section class="slide">
+      <div style="font-size:52px">😄</div><h1>Fun Fights</h1>
       <p class="lead">Those silly fights that end with sweets and hugs.</p>
-      <div class="gift">
-        <button class="btn primary" onclick="openGift()">Open Gift 🎁</button>
-      </div>
+      <div class="gift"><button class="btn primary" onclick="openGift()">Open Gift 🎁</button></div>
     </section>
-
-    <section id="slide5" class="slide">
-      <div style="font-size:54px">🙏</div>
-      <h1>Blessings</h1>
+    <section class="slide">
+      <div style="font-size:54px">🙏</div><h1>Blessings</h1>
       <p class="lead">Wishing you love, health, and success — today and always.</p>
-      <div style="height:12px"></div>
-      <div style="font-size:14px;color:#cfe7ff">Send this to your sibling and make their day.</div>
     </section>
-
-    <section id="slide6" class="slide">
-      <div style="font-size:56px">🎁</div>
-      <h1>Surprise Reveal</h1>
-      <p class="lead">Click the magic box to reveal a secret message.</p>
-      <div style="height:12px"></div>
+    <section class="slide">
+      <div style="font-size:56px">🎁</div><h1>Surprise Reveal</h1>
+      <p class="lead">Click to reveal a secret message.</p>
       <button class="btn" onclick="magicReveal()">Reveal Secret ✨</button>
     </section>
-
-    <section id="slide7" class="slide">
-      <div style="font-size:64px">🎆</div>
-      <h1>Happy Rakshabandhan</h1>
+    <section class="slide">
+      <div style="font-size:64px">🎆</div><h1>Happy Rakshabandhan</h1>
       <p class="lead">Tie the rakhi with a smile. Here's to many more memories.</p>
-      <div style="height:14px"></div>
-      <div style="font-size:13px;color:#bfdcff">Made with love — edit this file to customize text & images.</div>
     </section>
   </div>
 
@@ -128,26 +101,29 @@
     <button class="btn" id="musicToggle">Music ▶</button>
   </div>
 
-  <div class="right">
-    <div style="font-size:13px;color:#cfe7ff">Auto-play length</div>
-    <div style="height:8px"></div>
-    <div class="progress" aria-hidden="true"><i id="pb"></i></div>
-    <div style="height:10px"></div>
-    <div style="display:flex;gap:6px">
-      <button class="btn" onclick="setSpeed(4500)">Fast</button>
-      <button class="btn" onclick="setSpeed(7000)">Normal</button>
-      <button class="btn" onclick="setSpeed(11000)">Slow</button>
-    </div>
-  </div>
-
-  <div class="small-note">Tip: Add <code>?name=YourName</code> to the URL to personalize</div>
+  <div class="small-note">Tip: Add <code>?name=YourName</code> to personalize</div>
 </div>
 
-<audio id="bgm" loop crossorigin="anonymous" src="https://cdn.pixabay.com/download/audio/2021/10/23/audio_f9c69e8b39.mp3?filename=upbeat-energetic-festive-110561.mp3"></audio>
+<audio id="bgm" loop src="https://cdn.pixabay.com/download/audio/2021/10/23/audio_f9c69e8b39.mp3?filename=upbeat-energetic-festive-110561.mp3"></audio>
 
 <script>
-/* --- slideshow, name from URL, effects, confetti, petals, sparkles, fireworks --- */
-/* The JavaScript section from our earlier final version goes here exactly. */
+/* JS CONTROLS */
+const slides=document.querySelectorAll('.slide');let idx=0,auto=false,timer=null,speed=7000;
+function show(i){slides.forEach((s,si)=>s.classList.toggle('active',si===i));}
+function next(){idx=(idx+1)%slides.length;show(idx);}
+function prev(){idx=(idx-1+slides.length)%slides.length;show(idx);}
+document.getElementById('next').onclick=next;document.getElementById('prev').onclick=prev;
+document.getElementById('autoplayBtn').onclick=()=>{auto=!auto;document.getElementById('autoplayBtn').textContent=auto?'Pause':'Play';if(auto)startAuto();else stopAuto();};
+function startAuto(){stopAuto();timer=setInterval(next,speed);}function stopAuto(){if(timer)clearInterval(timer);}
+function setSpeed(ms){speed=ms;if(auto)startAuto();}
+function getQuery(n){return new URLSearchParams(location.search).get(n);}
+const nm=getQuery('name');if(nm)document.getElementById('nameSlot').textContent=decodeURIComponent(nm);
+function changeImg(img){const url=prompt('Enter image URL',img.src);if(url)img.src=url;}
+function openGift(){alert('🎉 Surprise! Happy Rakshabandhan ❤️');}
+function magicReveal(){alert('💖 You are always loved and cherished!');}
+const bgm=document.getElementById('bgm');let musicOn=false;
+document.getElementById('musicToggle').onclick=()=>{if(bgm.paused){bgm.play();musicOn=true;document.getElementById('musicToggle').textContent='Music ⏸';}else{bgm.pause();musicOn=false;document.getElementById('musicToggle').textContent='Music ▶';}};
+document.querySelector('.stage').addEventListener('click',()=>{if(!musicOn){bgm.play();musicOn=true;document.getElementById('musicToggle').textContent='Music ⏸';}if(!auto){auto=true;document.getElementById('autoplayBtn').textContent='Pause';startAuto();}});
 </script>
 </body>
 </html>
