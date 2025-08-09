@@ -5,130 +5,259 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Raksha Bandhan!</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;700&display=swap');
         
+        :root {
+            --primary-color: #ffc0cb;
+            --secondary-color: #e6b2e6;
+            --tertiary-color: #a1c4fd;
+            --font-main: 'Dancing Script', cursive;
+            --font-secondary: 'Poppins', sans-serif;
+            --text-color: #fff;
+        }
+
         body {
-            background: linear-gradient(135deg, #ffc0cb, #e6b2e6, #a1c4fd);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--tertiary-color));
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             overflow: hidden;
-            font-family: 'Dancing Script', cursive;
-            color: #fff;
+            font-family: var(--font-secondary);
+            color: var(--text-color);
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             position: relative;
         }
 
         .container {
             text-align: center;
-            animation: fadeIn 2s ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- Text Animation Stages --- */
+        #stage1, #stage2, #stage3 {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 1s ease-in, transform 1s ease-in;
+        }
+
+        #stage1.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        #stage2.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        #stage3.show {
+            opacity: 1;
+            transform: scale(1);
         }
 
         h1 {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            animation: bounceIn 1s ease-in-out;
-        }
-
-        p {
-            font-size: 2rem;
+            font-family: var(--font-main);
+            font-size: 5rem;
             margin: 0;
-            animation: textSlideIn 1.5s ease-in-out 0.5s forwards;
-            opacity: 0;
+        }
+        
+        p {
+            font-family: var(--font-secondary);
+            font-size: 2rem;
+            margin: 10px 0;
         }
 
+        /* --- Rakhi Animation --- */
         .rakhi-animation {
             margin-top: 30px;
-            width: 150px;
-            height: 150px;
-            background-image: url('https://i.imgur.com/uG5oR9P.png'); /* Replace with a different Rakhi image URL if you wish */
+            width: 200px;
+            height: 200px;
+            background-image: url('https://i.imgur.com/8QeM4cM.png'); /* A different, higher-quality rakhi image */
             background-size: cover;
-            animation: spinAndGlow 2s ease-in-out infinite, pulse 1.5s ease-in-out infinite;
             position: relative;
             z-index: 10;
+            opacity: 0;
+            transform: scale(0);
+            transition: opacity 1s, transform 1s;
         }
 
-        /* --- Animation Keyframes --- */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .rakhi-animation.show {
+            opacity: 1;
+            animation: bounceIn 1.5s forwards, pulseGlow 2s infinite;
         }
 
+        /* --- Confetti Animation --- */
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fce18a;
+            top: -10px;
+            opacity: 0;
+            transform: rotate(0deg);
+        }
+        .confetti.red { background-color: #ff5757; }
+        .confetti.blue { background-color: #7d8bff; }
+        .confetti.green { background-color: #a3ffac; }
+        .confetti.purple { background-color: #b779ff; }
+
+        /* --- Audio Button --- */
+        #audio-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            padding: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #audio-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* --- Keyframes --- */
         @keyframes bounceIn {
-            0%, 20%, 40%, 60%, 80%, 100% {
-                transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-            }
-            0% {
-                opacity: 0;
-                transform: scale3d(0.3, 0.3, 0.3);
-            }
-            20% {
-                transform: scale3d(1.1, 1.1, 1.1);
-            }
-            40% {
-                transform: scale3d(0.9, 0.9, 0.9);
-            }
-            60% {
-                opacity: 1;
-                transform: scale3d(1.03, 1.03, 1.03);
-            }
-            80% {
-                transform: scale3d(0.97, 0.97, 0.97);
-            }
-            100% {
-                opacity: 1;
-                transform: scale3d(1, 1, 1);
-            }
-        }
-        
-        @keyframes textSlideIn {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.2); }
+            80% { transform: scale(0.9); }
+            100% { transform: scale(1); }
         }
 
-        @keyframes spinAndGlow {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); filter: brightness(1.2); }
-            100% { transform: rotate(360deg) scale(1); }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 5px #fff, 0 0 10px #e6b2e6; }
+            50% { box-shadow: 0 0 20px #fff, 0 0 40px #e6b2e6; }
+            100% { box-shadow: 0 0 5px #fff, 0 0 10px #e6b2e6; }
         }
         
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.7); }
-            100% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 1; }
         }
     </style>
 </head>
 <body>
+
     <div class="container">
         </div>
+
+    <div class="confetti-container"></div>
     
+    <button id="audio-toggle">🔊</button>
+    <audio id="bg-audio" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-happiness.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const container = document.querySelector('.container');
             const urlParams = new URLSearchParams(window.location.search);
             const name = urlParams.get('name');
+            const audio = document.getElementById('bg-audio');
+            const audioToggle = document.getElementById('audio-toggle');
+            let isPlaying = false;
 
-            if (name) {
-                container.innerHTML = `
-                    <h1>Happy Raksha Bandhan!</h1>
-                    <p>Dear ${name},<br> You are the best sister in the world! You and our other sisters mean everything to me. I love you so much!</p>
-                    <div class="rakhi-animation"></div>
-                `;
-            } else {
-                container.innerHTML = `
-                    <h1>Happy Raksha Bandhan to all my sisters!</h1>
-                    <p>Sakshi, Divya, Jyoti, Pooja, Payal, and Pari<br> You are the best sisters in the world! I love you all so much!</p>
-                    <div class="rakhi-animation"></div>
-                `;
+            const audioPromise = audio.play();
+            if (audioPromise !== undefined) {
+                audioPromise.then(_ => {
+                    isPlaying = true;
+                    audioToggle.innerHTML = '🔊';
+                }).catch(error => {
+                    isPlaying = false;
+                    audioToggle.innerHTML = '🔇';
+                });
             }
+
+            audioToggle.addEventListener('click', () => {
+                if (isPlaying) {
+                    audio.pause();
+                    isPlaying = false;
+                    audioToggle.innerHTML = '🔇';
+                } else {
+                    audio.play();
+                    isPlaying = true;
+                    audioToggle.innerHTML = '🔊';
+                }
+            });
+
+            // Stage 1: Initial message
+            const stage1 = `
+                <div id="stage1">
+                    <h1>Happy Raksha Bandhan!</h1>
+                </div>
+            `;
+            
+            // Stage 2: Confetti and personalized message
+            const stage2 = (sistersName) => `
+                <div id="stage2">
+                    <p>Dear ${sistersName},</p>
+                    <p>Wishing you a day filled with joy, love, and sweet memories. May our bond grow stronger with each passing year.</p>
+                </div>
+            `;
+            
+            // Stage 3: The Rakhi
+            const stage3 = `
+                <div id="stage3">
+                    <p>You are the best sister in the world! I love you so much!</p>
+                    <div class="rakhi-animation"></div>
+                </div>
+            `;
+
+            // Function to generate confetti
+            const generateConfetti = () => {
+                const confettiContainer = document.querySelector('.confetti-container');
+                const colors = ['red', 'blue', 'green', 'purple'];
+                for (let i = 0; i < 50; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = `confetti ${colors[Math.floor(Math.random() * colors.length)]}`;
+                    confetti.style.left = `${Math.random() * 100}vw`;
+                    confetti.style.animation = `fall ${Math.random() * 2 + 3}s ease-in-out infinite`;
+                    confetti.style.animationDelay = `${Math.random() * 5}s`;
+                    confettiContainer.appendChild(confetti);
+                }
+            };
+            
+            // The animation sequence
+            setTimeout(() => {
+                container.innerHTML = stage1;
+                document.getElementById('stage1').classList.add('show');
+            }, 1000);
+
+            setTimeout(() => {
+                document.getElementById('stage1').classList.remove('show');
+                generateConfetti();
+            }, 4000);
+
+            setTimeout(() => {
+                const sistersName = name || "Sakshi, Divya, Jyoti, Pooja, Payal, and Pari";
+                container.innerHTML = stage2(sistersName);
+                document.getElementById('stage2').classList.add('show');
+            }, 5000);
+
+            setTimeout(() => {
+                document.getElementById('stage2').classList.remove('show');
+            }, 9000);
+
+            setTimeout(() => {
+                container.innerHTML = stage3;
+                document.getElementById('stage3').classList.add('show');
+                document.querySelector('.rakhi-animation').classList.add('show');
+            }, 10000);
         });
     </script>
 </body>
