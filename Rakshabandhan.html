@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Raksha Bandhan!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+        
+        body {
+            background: linear-gradient(135deg, #ffc0cb, #e6b2e6, #a1c4fd);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Dancing Script', cursive;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            animation: bounceIn 1s ease-in-out;
+        }
+
+        p {
+            font-size: 2rem;
+            margin: 0;
+            animation: textSlideIn 1.5s ease-in-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        .rakhi-animation {
+            margin-top: 30px;
+            width: 150px;
+            height: 150px;
+            background-image: url('https://i.imgur.com/uG5oR9P.png'); /* Replace with a different Rakhi image URL if you wish */
+            background-size: cover;
+            animation: spinAndGlow 2s ease-in-out infinite, pulse 1.5s ease-in-out infinite;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Animation Keyframes --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            }
+            0% {
+                opacity: 0;
+                transform: scale3d(0.3, 0.3, 0.3);
+            }
+            20% {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            40% {
+                transform: scale3d(0.9, 0.9, 0.9);
+            }
+            60% {
+                opacity: 1;
+                transform: scale3d(1.03, 1.03, 1.03);
+            }
+            80% {
+                transform: scale3d(0.97, 0.97, 0.97);
+            }
+            100% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+            }
+        }
+        
+        @keyframes textSlideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes spinAndGlow {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); filter: brightness(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.7); }
+            100% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.container');
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name');
+
+            if (name) {
+                container.innerHTML = `
+                    <h1>Happy Raksha Bandhan!</h1>
+                    <p>Dear ${name},<br> You are the best sister in the world! You and our other sisters mean everything to me. I love you so much!</p>
+                    <div class="rakhi-animation"></div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <h1>Happy Raksha Bandhan to all my sisters!</h1>
+                    <p>Sakshi, Divya, Jyoti, Pooja, Payal, and Pari<br> You are the best sisters in the world! I love you all so much!</p>
+                    <div class="rakhi-animation"></div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
